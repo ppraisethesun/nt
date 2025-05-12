@@ -1,0 +1,4 @@
+#!/bin/sh
+
+_build/${MIX_ENV}/rel/nt_task/bin/nt_task eval NtTask.ReleaseTasks.migrate 
+PHX_SERVER=true _build/${MIX_ENV}/rel/nt_task/bin/nt_task start

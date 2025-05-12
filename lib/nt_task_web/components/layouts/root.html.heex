@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" class="[scrollbar-gutter:stable]">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="csrf-token" content={get_csrf_token()} />
+    <.live_title default="NtTask" suffix=" · Phoenix Framework">
+      {assigns[:page_title]}
+    </.live_title>
+    <link phx-track-static rel="stylesheet" href={~p"/assets/app.css"} />
+    <script defer phx-track-static type="text/javascript" src={~p"/assets/app.js"}>
+    </script>
+  </head>
+  <body class="bg-white">
+    <header class="relative z-10 flex items-center justify-between px-4 sm:px-6 lg:px-8 py-3 border-b border-zinc-100">
+      <div class="flex items-center gap-4">
+        <a href="/">
+          <div class="text-2xl font-bold">LOGO</div>
+          <!-- You can replace the div above with your actual logo image, e.g.: -->
+          <!-- <img src={~p"/images/your_logo.svg"} width="36" /> -->
+        </a>
+      </div>
+      <ul class="flex items-center gap-4">
+        <li class="mr-4">
+          <.link
+            href="#"
+            target="_blank" rel="noopener noreferrer"
+            class="flex items-center gap-1 text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+          >
+            <.icon name="hero-code-bracket-square" class="h-4 w-4" /> GitHub
+          </.link>
+        </li>
+        <%= if @current_user do %>
+          <li class="text-[0.8125rem] leading-6 text-zinc-900">
+            Logged in as <b>{@current_user.email}</b>
+          </li>
+          <li>
+            <.link
+              href={~p"/users/settings"}
+              class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+            >
+              Settings
+            </.link>
+          </li>
+          <li>
+            <.link
+              href={~p"/users/log_out"}
+              method="delete"
+              class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+            >
+              Log out
+            </.link>
+          </li>
+        <% else %>
+          <li>
+            <.link
+              href={~p"/users/register"}
+              class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+            >
+              Register
+            </.link>
+          </li>
+          <li>
+            <.link
+              href={~p"/users/log_in"}
+              class="text-[0.8125rem] leading-6 text-zinc-900 font-semibold hover:text-zinc-700"
+            >
+              Log in
+            </.link>
+          </li>
+        <% end %>
+      </ul>
+    </header>
+    {@inner_content}
+  </body>
+</html>
